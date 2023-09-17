@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(32, 45, 49);
+}
+h1 {
+    color: blanchedalmond;
+}
+h2 {
+    color: blanchedalmond;
+}
+
+
+.my-pic{
+    border-color: blanchedalmond;
+    border: 4mm ridge blanchedalmond;
+    border-radius: 15px;
+
+}
+section img{
+    border-radius: 100%;
+    border-color: blanchedalmond;
+    border-style:ridge ;
+    margin-bottom: 30px;
+    margin-right: 10px;
+}
+p{
+    color: aliceblue;
+}
+label{
+    color: aliceblue;
+}
+a{
+    color: rgb(151, 232, 235);
+}
+table{
+    color: aliceblue;
+    border-radius: 8px;
+    border-width: 1mm;
+    border-color: blanchedalmond;
+    border-style: ridge;
+}
+th{
+    color: blanchedalmond;
+}
