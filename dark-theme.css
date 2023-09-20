@@ -1,13 +1,43 @@
 body {
     background-color: rgb(32, 45, 49);
+    font-family: manrope ;
+    font-size: 16px;
+
+}
+::selection{
+    background: rgba(179, 179, 179, 0.514); ;
+}
+li{
+    display: inline;
+}
+
+li a{
+    display: inline;
+    padding: 2px 10px ;
+    color:rgb(3, 209, 3);
+    background-color:blanchedalmond ;
+    border-radius: 3em ;
+    margin-right: 1em ;
+    text-decoration: none;
+    
+}
+li > a:first-of-type{
+    text-decoration: underline  ;
 }
 h1 {
     color: blanchedalmond;
 }
 h2 {
     color: blanchedalmond;
+    font-family: sans-serif;
 }
 
+h2 + p::first-letter{
+    font-size: x-large;
+}
+header{
+    text-transform: uppercase;
+}
 
 .my-pic{
     border-color: blanchedalmond;
@@ -28,9 +58,6 @@ p{
 label{
     color: aliceblue;
 }
-a{
-    color: rgb(151, 232, 235);
-}
 table{
     color: aliceblue;
     border-radius: 8px;
@@ -40,4 +67,18 @@ table{
 }
 th{
     color: blanchedalmond;
+    text-transform: uppercase;
+}
+tr :hover{
+    background-color: rgba(179, 179, 179, 0.514);
+}
+.top {
+    background-color: goldenrod;
+}
+em{
+    background-color: yellowgreen;
+}
+#the_most_important{
+    background-color: goldenrod;
+    text-transform: uppercase;
 }
