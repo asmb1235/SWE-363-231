@@ -7,8 +7,16 @@ body {
 ::selection{
     background: rgba(179, 179, 179, 0.514); ;
 }
+nav{
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0px;
+    background: blanchedalmond;
+    padding: 10px;
+}
 li{
     display: inline;
+   
 }
 
 li a{
@@ -20,6 +28,9 @@ li a{
     margin-right: 1em ;
     text-decoration: none;
     
+}
+li a:hover{
+    cursor: pointer;
 }
 li > a:first-of-type{
     text-decoration: underline  ;
@@ -58,12 +69,21 @@ p{
 label{
     color: aliceblue;
 }
+input{
+    height: 20px;
+    border-color: lightgray;
+}
+textarea{
+    height: 20px;
+}
+.top {
+    background-color: goldenrod;
+}
+tbody tr:nth-child(odd){
+    background-color:rgb(82, 114, 136);
+}
 table{
     color: aliceblue;
-    border-radius: 8px;
-    border-width: 1mm;
-    border-color: blanchedalmond;
-    border-style: ridge;
 }
 th{
     color: blanchedalmond;
@@ -71,9 +91,6 @@ th{
 }
 tr :hover{
     background-color: rgba(179, 179, 179, 0.514);
-}
-.top {
-    background-color: goldenrod;
 }
 em{
     background-color: yellowgreen;
