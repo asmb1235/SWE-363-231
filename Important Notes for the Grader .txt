@@ -1,0 +1,13 @@
+Exercises have been graded:
+1. HTML 1
+2. HTML 2
+3. CSS 1
+4. CSS 2
+5. CSS 4
+
+Exercises to be graded:
+1. CSS 3(I did Transition and Animation for the 'Home English' page only)
+also, you can find the content of the page under the loadr, Icould not remove it..
+2. JS 1 (I did the changes for the 'Home English' page only)
+3. BE 1
+4. BE 2
