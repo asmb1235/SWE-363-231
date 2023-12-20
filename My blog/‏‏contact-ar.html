@@ -6,6 +6,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
 </head>
 <body>
     <nav>
@@ -32,5 +42,69 @@
     </form> 
     <button class="button" popovertarget="confirmation">إرسال</button>
     <div popover id="confirmation">تم إرسال الرسالة..</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      let screensaverTimeout;
+  
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+  
+      // Create geometrical shapes (example: a cube)
+      const geometry = new THREE.BoxGeometry(1, 1, 1); // Create a cube geometry
+      const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+  
+      camera.position.z = 5;
+  
+      // Function to animate the scene
+      const animate = () => {
+        requestAnimationFrame(animate);
+  
+        // Add your animation logic here
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+  
+        renderer.render(scene, camera);
+      };
+  
+      // Start the animation loop
+      animate();
+  
+      // Function to reset screensaver timeout
+      const resetScreensaverTimeout = () => {
+        clearTimeout(screensaverTimeout);
+        screensaverTimeout = setTimeout(activateScreensaver, 10000);
+      };
+  
+      // Activate screensaver function
+      const activateScreensaver = () => {
+        // Hide other content or overlay the screensaver
+        // For example, create a full-screen div with your screensaver content
+        const screensaverDiv = document.createElement('div');
+        screensaverDiv.style.position = 'fixed';
+        screensaverDiv.style.top = '0';
+        screensaverDiv.style.left = '0';
+        screensaverDiv.style.width = '100%';
+        screensaverDiv.style.height = '100%';
+        screensaverDiv.style.backgroundColor = '#000'; // Set background color or any desired style
+  
+        // Add your Three.js canvas to the screensaver div
+        screensaverDiv.appendChild(renderer.domElement);
+  
+        document.body.appendChild(screensaverDiv);
+      };
+  
+      // Event listeners to reset screensaver timeout on user interaction
+      document.addEventListener('mousemove', resetScreensaverTimeout);
+      document.addEventListener('keypress', resetScreensaverTimeout);
+  
+      // Initial setup of screensaver timeout
+      resetScreensaverTimeout();
+    </script>
 </body>
 </html>

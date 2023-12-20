@@ -6,7 +6,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <style>
+            #signatureCanvas {
+                border: 1px solid #000;
+            }
+        </style>
+        
     </head>
+    <body>
     <nav>
         <li >
             <a href="http://127.0.0.1:5500/My%20blog/index.html">Home</a>
@@ -33,5 +40,57 @@
     </form> 
     <button class="button" popovertarget="confirmation">Submit</button>
     <div popover id="confirmation">Message was sent..</div>
+    <h1>Signature Capture</h1>
 
+    <canvas id="signatureCanvas" width="400" height="200"></canvas><br><br>
+
+    <button id="submitBtn">Submit Signature</button>
+    <script>
+        // JavaScript code for signature functionality
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let painting = false;
+
+        function startPosition(e) {
+            painting = true;
+            draw(e);
+        }
+
+        function endPosition() {
+            painting = false;
+            ctx.beginPath();
+        }
+
+        function draw(e) {
+            if (!painting) return;
+
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+
+            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        }
+
+        canvas.addEventListener('mousedown', startPosition);
+        canvas.addEventListener('mouseup', endPosition);
+        canvas.addEventListener('mousemove', draw);
+
+        // Function to get the signature data as an image
+        function getSignatureData() {
+            const dataURL = canvas.toDataURL(); // Convert canvas to data URL
+            return dataURL;
+        }
+
+        // Event listener for submit button
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const signatureData = getSignatureData();
+            // Here, you can use 'signatureData' (dataURL) as needed, like sending it to the server.
+            console.log(signatureData); // For demonstration purposes - logs the signature data to the console
+            alert('Signature captured! Check the console for the image data.');
+        });
+    </script>
+</body>
 </html>

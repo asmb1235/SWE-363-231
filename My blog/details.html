@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        
     </head>
     <body>
         <nav>
@@ -108,6 +109,45 @@
         
             // Call the function to create the table when the page loads
             createTable();
+        </script>
+        <script>
+            // Function to fetch weather data from OpenWeatherMap API
+function fetchWeatherData() {
+  // Replace 'YOUR_API_KEY' with your actual API key from OpenWeatherMap
+  const apiKey = '1d7d4e395100e0833318c4288dcf482d';
+  const city = 'Medina';
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Handle the received weather data
+      displayWeatherData(data);
+    })
+    .catch(error => {
+      console.error('There was a problem fetching the weather data:', error);
+    });
+}
+
+// Function to display weather data on the webpage
+function displayWeatherData(data) {
+  const weatherSection = document.createElement('section');
+  weatherSection.innerHTML = `
+    <h2>Current Weather in Medina:</h2>
+    <p>Temperature: ${data.main.temp}°C</p>
+    <p>Weather: ${data.weather[0].description}</p>
+    <p>Humidity: ${data.main.humidity}%</p>
+  `;
+  document.body.appendChild(weatherSection);
+}
+
+// Call the function to fetch weather data when the page loads
+fetchWeatherData();
         </script>
     </body>
 </html>

@@ -6,8 +6,17 @@ Exercises have been graded:
 5. CSS 4
 
 Exercises to be graded:
-1. CSS 3(I did Transition and Animation for the 'Home English' page only)
-also, you can find the content of the page under the loadr, Icould not remove it..
-2. JS 1 (I did the changes for the 'Home English' page only)
-3. BE 1
-4. BE 2
+1. CSS 3(I did Transition and Animation for the "index.html" page only)
+	Also, you can find the content of the page under the loadr, because I could not remove the loader..
+
+2. JS 1 (I did the changes for the "index.html" page only)
+
+3. JS 2 (I did the changes for the "details.html" page)
+	keyboard ttt game is in "ttt-keyboard.html", you can reach it from "details.html"
+4. JS 3 (I did changes as folows:
+	Exercise 1 (Fetch) Done in"details.html"
+	Exercise 2 (Canvas 2D) Done in "contact.html"
+	Exercise 3 (Canvas 3D -Three.js) Done in "contact-ar.html")
+4. BE 1
+
+5. BE 2
