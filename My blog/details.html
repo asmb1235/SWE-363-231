@@ -52,70 +52,62 @@
             />
         </section>
 
-        <table>
-            <tr class="top" style="background-color: goldenrod;">
-                <th>Hobby</th>
-                <th>Rank</th>
-                <th>When</th>
-                <th>Why</th>
-            </tr>
-            <tbody> <!--First data raw-->
-            <tr>
-                <td>Chanting</td>
-                <td>#1</td>
-                <td>Random</td>
-                <td>To highlight the lofty meanings</td>
-            </tr>
-            <tr>
-                <td>Reading</td>
-                <td>#2</td>
-                <td>Random</td>
-                <td>Mind touring</td>
-            </tr>
-            <tr>
-                <td>Writing poetry</td>
-                <td>#3</td>
-                <td>Random</td>
-                <td>To express the above meanings</td>
-            </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="3">
-                        Hobbyies Count =
-                    </th>
-
-                    <td align="center">
-                        +3
-                    </td>
-                </tr>
-                
-            </tfoot>
-            
-        </table>
-        <tbody id="hobbyTableBody">
-            <!-- Existing table rows will be populated here -->
-        </tbody>
         <script>
-            const hobbies = [
-                { name: "Chanting", rank: "#1", when: "Random", why: "To highlight the lofty meanings" },
-                { name: "Reading", rank: "#2", when: "Random", why: "Mind touring" },
-                { name: "Writing poetry", rank: "#3", when: "Random", why: "To express the above meanings" }
+            // Sample data in a JavaScript list of objects
+            const hobbiesData = [
+                { hobby: "Chanting", rank: "#1", when: "Random", why: "To highlight the lofty meanings" },
+                { hobby: "Reading", rank: "#2", when: "Random", why: "Mind touring" },
+                { hobby: "Writing poetry", rank: "#3", when: "Random", why: "To express the above meanings" }
             ];
-    
-            const tableBody = document.getElementById('hobbyTableBody');
-    
-            hobbies.forEach(hobby => {
-                const row = document.createElement('tr');
-    
-                for (const prop in hobby) {
-                    const cell = document.createElement('td');
-                    cell.textContent = hobby[prop];
-                    row.appendChild(cell);
-                }
-    
-                tableBody.appendChild(row);
-            });
+        
+            // Function to create the table dynamically
+            function createTable() {
+                const table = document.createElement('table');
+        
+                // Create table header
+                const headerRow = document.createElement('tr');
+                headerRow.classList.add('top');
+                headerRow.style.backgroundColor = 'goldenrod';
+        
+                ['Hobby', 'Rank', 'When', 'Why'].forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    headerRow.appendChild(th);
+                });
+                table.appendChild(headerRow);
+        
+                // Create table body
+                const tbody = document.createElement('tbody');
+                hobbiesData.forEach(data => {
+                    const row = document.createElement('tr');
+                    Object.values(data).forEach(value => {
+                        const cell = document.createElement('td');
+                        cell.textContent = value;
+                        row.appendChild(cell);
+                    });
+                    tbody.appendChild(row);
+                });
+                table.appendChild(tbody);
+        
+                // Create table footer
+                const tfoot = document.createElement('tfoot');
+                const footerRow = document.createElement('tr');
+                const footerTh = document.createElement('th');
+                footerTh.colSpan = 3;
+                footerTh.textContent = 'Hobbies Count =';
+                const footerTd = document.createElement('td');
+                footerTd.setAttribute('align', 'center');
+                footerTd.textContent = '+' + hobbiesData.length;
+                footerRow.appendChild(footerTh);
+                footerRow.appendChild(footerTd);
+                tfoot.appendChild(footerRow);
+                table.appendChild(tfoot);
+        
+                document.body.appendChild(table);
+            }
+        
+            // Call the function to create the table when the page loads
+            createTable();
         </script>
     </body>
 </html>
