@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        .active-cell {
+            outline: 2px solid #333;
+        }
+        #instructions {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .cell {
+            font-size: 2em;
+            background-color: beige;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .cell:hover {
+            background-color: blanchedalmond;
+        }
+
+        .cell.X {
+            color: blue;
+        }
+
+        .cell.O {
+            color: red;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        #turn {
+            margin-bottom: 20px;
+        }
+
+        #reset {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="turn">
+        Now it's <span>X</span>'s turn
+    </h1>
+    <!-- Board -->
+    <div class="board">
+        <div class="row">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+        <div class="row">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+        <div class="row">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+    </div>
+    <button id="reset">Reset Game</button>
+    <div id="instructions">
+        <p>Use arrow keys to navigate through cells.</p>
+        <p>Press Spacebar or Enter to mark a cell.</p>
+    </div>
+    <script>
+        let turn = "X";
+        let gameEnded = false;
+        let activeCellIndex = 0;
+
+        const cells = document.querySelectorAll('.cell');
+        const turnHeader = document.querySelector("#turn span");
+        const resetButton = document.getElementById("reset");
+
+        // Pattern for winning conditions
+        const winningPatterns = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        cells.forEach((cell, index) => {
+            cell.addEventListener('click', cellClicked);
+            cell.addEventListener('keydown', handleKeyPress);
+            cell.setAttribute('tabindex', '0'); // Make cells focusable
+            cell.dataset.index = index;
+        });
+
+        function handleKeyPress(event) {
+            const key = event.key;
+
+            if (key === "ArrowRight" || key === "ArrowDown") {
+                activeCellIndex++;
+            } else if (key === "ArrowLeft" || key === "ArrowUp") {
+                activeCellIndex--;
+            } else if (key === "Enter" || key === " ") {
+                cells[activeCellIndex].click();
+                return;
+            }
+
+            // Keep the active cell index within the valid range
+            activeCellIndex = (activeCellIndex + cells.length) % cells.length;
+
+            // Remove active-cell class from all cells
+            cells.forEach(cell => cell.classList.remove('active-cell'));
+
+            // Add active-cell class to the current active cell
+            cells[activeCellIndex].classList.add('active-cell');
+
+            // Focus on the current active cell
+            cells[activeCellIndex].focus();
+        }
+
+        resetButton.addEventListener('click', resetGame);
+
+        function cellClicked(event) {
+            let cell = event.target;
+
+            if (!cell.textContent && !gameEnded) {
+                cell.innerText = turn;
+                cell.classList.add(turn);
+
+                if (checkWin(turn)) {
+                    turnHeader.innerText = `${turn} wins!`;
+                    gameEnded = true;
+                } else if (isDraw()) {
+                    document.querySelector("#turn").innerText = "It's a draw!";
+                    gameEnded = true;
+                } else {
+                    turn = turn === "X" ? "O" : "X";
+                    turnHeader.innerText = turn;
+                }
+            }
+        }
+
+        function checkWin(player) {
+            return winningPatterns.some(pattern => {
+                return pattern.every(index => {
+                    return cells[index].classList.contains(player);
+                });
+            });
+        }
+
+        function isDraw() {
+            return [...cells].every(cell => {
+                return cell.textContent !== '';
+            });
+        }
+
+        function resetGame() {
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.classList.remove("X", "O");
+                cell.classList.remove('active-cell'); // Remove active-cell class
+            });
+
+            gameEnded = false;
+            turn = "X";
+            turnHeader.innerText = turn;
+            activeCellIndex = 0;
+            cells[activeCellIndex].classList.add('active-cell'); // Set the first cell as active
+        }
+    </script>
+</body>
+
+</html>
